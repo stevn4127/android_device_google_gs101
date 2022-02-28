@@ -1,11 +1,12 @@
 # Build hacks
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+RELAX_USES_LIBRARY_CHECK=true
 
 # Build a vendorimage
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 AB_OTA_PARTITIONS += \
     vendor
-    
+
 # Build vendor_dlkm
 BOARD_USES_VENDOR_DLKMIMAGE := true
 BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -16,9 +17,12 @@ AB_OTA_PARTITIONS += \
 # vbmeta_vendor
 AB_OTA_PARTITIONS += \
     vbmeta_vendor
-    
+
 # AVB flags
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
+
+# Manifests
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs101/lineage_compatibility_matrix.xml
 
 # Enable chain partition for vendor.
 BOARD_AVB_VBMETA_VENDOR := vendor
