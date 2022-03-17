@@ -99,6 +99,14 @@
       "ResetOnInit": true
     },
     {
+      "Name": "DisplayWakeup",
+      "Path": "/sys/devices/platform/1c300000.drmdecon/early_wakeup",
+      "Values": [
+        "1",
+        "0"
+      ]
+    },
+    {
       "Name": "CPUUtilThreshold",
       "Path": "/sys/kernel/vendor_sched/util_threshold",
       "Values": [
@@ -244,14 +252,6 @@
       "ResetOnInit": true
     },
     {
-      "Name": "DisplayWakeup",
-      "Path": "/sys/devices/platform/1c300000.drmdecon/early_wakeup",
-      "Values": [
-        "1",
-        "0"
-      ]
-    },
-    {
       "Name": "LimitFlashCurrent",
       "Path": "vendor.camera.max_flash_current",
       "Values": [
@@ -296,6 +296,86 @@
         "adaptive"
       ],
       "ResetOnInit": true
+    },
+    {
+      "Name": "BigControlTempSet",
+      "Path": "/dev/thermal/tz-by-name/BIG/trip_point_2_temp",
+      "Values": [
+        "90000",
+        "80000"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": false
+    },
+    {
+      "Name": "MidControlTempSet",
+      "Path": "/dev/thermal/tz-by-name/MID/trip_point_2_temp",
+      "Values": [
+        "90000",
+        "80000"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": false
+    },
+    {
+      "Name": "LittleControlTempSet",
+      "Path": "/dev/thermal/tz-by-name/LITTLE/trip_point_2_temp",
+      "Values": [
+        "90000",
+        "80000"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": false
+    },
+    {
+      "Name": "G3dControlTempSet",
+      "Path": "/dev/thermal/tz-by-name/G3D/trip_point_2_temp",
+      "Values": [
+        "90000",
+        "80000"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": false
+    },
+    {
+      "Name": "BigSwitchOnTempSet",
+      "Path": "/dev/thermal/tz-by-name/BIG/trip_point_1_temp",
+      "Values": [
+        "70000",
+        "60000"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": false
+    },
+    {
+      "Name": "MidSwitchOnTempSet",
+      "Path": "/dev/thermal/tz-by-name/MID/trip_point_1_temp",
+      "Values": [
+        "70000",
+        "60000"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": false
+    },
+    {
+      "Name": "LittleSwitchOnTempSet",
+      "Path": "/dev/thermal/tz-by-name/LITTLE/trip_point_1_temp",
+      "Values": [
+        "70000",
+        "60000"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": false
+    },
+    {
+      "Name": "G3dSwitchOnTempSet",
+      "Path": "/dev/thermal/tz-by-name/G3D/trip_point_1_temp",
+      "Values": [
+        "70000",
+        "60000"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": false
     }
   ],
   "Actions": [
@@ -411,6 +491,24 @@
       "Node": "CDCpuset",
       "Duration": 1000,
       "Value": "4-7"
+    },
+    {
+      "PowerHint": "CAMERA_LAUNCH_EXTENDED",
+      "Node": "CPUBigClusterMaxFreq",
+      "Duration": 2000,
+      "Value": "9999999"
+    },
+    {
+      "PowerHint": "CAMERA_LAUNCH_EXTENDED",
+      "Node": "CPUMidClusterMaxFreq",
+      "Duration": 2000,
+      "Value": "9999999"
+    },
+    {
+      "PowerHint": "CAMERA_LAUNCH_EXTENDED",
+      "Node": "CPULittleClusterMaxFreq",
+      "Duration": 2000,
+      "Value": "9999999"
     },
     {
       "PowerHint": "CAMERA_THERMAL_CPU_THROTTLE",
@@ -1009,11 +1107,6 @@
       "Value": "BOOST_DISPLAY"
     },
     {
-      "PowerHint": "DISPLAY_UPDATE_IMMINENT",
-      "Type": "DoHint",
-      "Value": "BOOST_DISPLAY"
-    },
-    {
       "PowerHint": "BOOST_120HZ",
       "Node": "TAUClampBoost",
       "Duration": 200,
@@ -1099,6 +1192,11 @@
       "Value": "1"
     },
     {
+      "PowerHint": "DISPLAY_UPDATE_IMMINENT",
+      "Type": "DoHint",
+      "Value": "BOOST_DISPLAY"
+    },
+    {
       "PowerHint": "THERMAL_FLASH_LED_REDUCE_CRITICAL",
       "Node": "LimitFlashCurrent",
       "Duration": 0,
@@ -1121,6 +1219,54 @@
       "Node": "GPUMinFreq",
       "Duration": 0,
       "Value": "400000"
+    },
+    {
+      "PowerHint": "THERMAL_VIRTUAL-SKIN_SEVERE",
+      "Node": "BigControlTempSet",
+      "Duration": 0,
+      "Value": "80000"
+    },
+    {
+      "PowerHint": "THERMAL_VIRTUAL-SKIN_SEVERE",
+      "Node": "MidControlTempSet",
+      "Duration": 0,
+      "Value": "80000"
+    },
+    {
+      "PowerHint": "THERMAL_VIRTUAL-SKIN_SEVERE",
+      "Node": "LittleControlTempSet",
+      "Duration": 0,
+      "Value": "80000"
+    },
+    {
+      "PowerHint": "THERMAL_VIRTUAL-SKIN_SEVERE",
+      "Node": "G3dControlTempSet",
+      "Duration": 0,
+      "Value": "80000"
+    },
+    {
+      "PowerHint": "THERMAL_VIRTUAL-SKIN_SEVERE",
+      "Node": "BigSwitchOnTempSet",
+      "Duration": 0,
+      "Value": "60000"
+    },
+    {
+      "PowerHint": "THERMAL_VIRTUAL-SKIN_SEVERE",
+      "Node": "MidSwitchOnTempSet",
+      "Duration": 0,
+      "Value": "60000"
+    },
+    {
+      "PowerHint": "THERMAL_VIRTUAL-SKIN_SEVERE",
+      "Node": "LittleSwitchOnTempSet",
+      "Duration": 0,
+      "Value": "60000"
+    },
+    {
+      "PowerHint": "THERMAL_VIRTUAL-SKIN_SEVERE",
+      "Node": "G3dSwitchOnTempSet",
+      "Duration": 0,
+      "Value": "60000"
     },
     {
       "PowerHint": "FACE_UNLOCK_BOOST",

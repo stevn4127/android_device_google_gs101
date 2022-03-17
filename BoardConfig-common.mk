@@ -19,11 +19,6 @@ include build/make/target/board/BoardConfigPixelCommon.mk
 # Should be uncommented after fixing vndk-sp violation is fixed.
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
-# This prop, when set to 1, will prevent OTA tooling from generating a VABC OTA,
-# even if device actually supports it.
-# Remove this once P21 decides to use VABC OTA
-BOARD_DONT_USE_VABC_OTA := true
-
 # HACK : To fix up after bring up multimedia devices.
 TARGET_SOC := gs101
 
@@ -49,6 +44,7 @@ endif
 BOARD_KERNEL_CMDLINE += earlycon=exynos4210,0x10A00000 console=ttySAC0,115200 androidboot.console=ttySAC0 printk.devkmsg=on
 BOARD_KERNEL_CMDLINE += cma_sysfs.experimental=Y
 BOARD_KERNEL_CMDLINE += stack_depot_disable=off page_pinner=on
+BOARD_KERNEL_CMDLINE += swiotlb=noforce
 BOARD_BOOTCONFIG += androidboot.boot_devices=14700000.ufs
 
 TARGET_NO_BOOTLOADER := true
@@ -226,6 +222,11 @@ SOONG_CONFIG_aoc_audio_func += aosp_build
 
 SOONG_CONFIG_aoc_audio_func_aosp_build := true
 endif
+
+SOONG_CONFIG_NAMESPACES += haptics
+SOONG_CONFIG_haptics += \
+    actuator_model
+SOONG_CONFIG_haptics_actuator_model := $(ACTUATOR_MODEL)
 
 # Primary AudioHAL Configuration
 #BOARD_USE_COMMON_AUDIOHAL := true

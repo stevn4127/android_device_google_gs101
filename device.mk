@@ -212,9 +212,6 @@ DEVICE_MATRIX_FILE := \
 
 DEVICE_PACKAGE_OVERLAYS += device/google/gs101/overlay
 
-# This device is shipped with 31 (Android S)
-PRODUCT_SHIPPING_API_LEVEL := 31
-
 # Enforce the Product interface
 PRODUCT_PRODUCT_VNDK_VERSION := current
 PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
@@ -223,7 +220,7 @@ PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
 PRODUCT_COPY_FILES += \
 	$(LOCAL_KERNEL):kernel \
 	device/google/gs101/conf/init.gs101.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.gs101.usb.rc \
-	device/google/gs101/conf/ueventd.gs101.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
+	device/google/gs101/conf/ueventd.gs101.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc
 
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.gs101.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.gs101.rc
@@ -478,17 +475,6 @@ PRODUCT_PACKAGES += \
 	android.hardware.drm@1.4-service.widevine \
 	liboemcrypto \
 
-ORIOLE_PRODUCT := %oriole
-RAVEN_PRODUCT := %raven
-ifneq (,$(filter $(ORIOLE_PRODUCT), $(TARGET_PRODUCT)))
-        LOCAL_TARGET_PRODUCT := oriole
-else ifneq (,$(filter $(RAVEN_PRODUCT), $(TARGET_PRODUCT)))
-        LOCAL_TARGET_PRODUCT := raven
-else
-        LOCAL_TARGET_PRODUCT := slider
-endif
-
-
 SOONG_CONFIG_NAMESPACES += google3a_config
 SOONG_CONFIG_google3a_config += \
 	soc \
@@ -499,7 +485,6 @@ SOONG_CONFIG_google3a_config += \
 SOONG_CONFIG_google3a_config_soc := gs101
 SOONG_CONFIG_google3a_config_gcam_awb := true
 SOONG_CONFIG_google3a_config_ghawb_truetone := true
-SOONG_CONFIG_google3a_config_target_device := $(LOCAL_TARGET_PRODUCT)
 
 # Determine if Lyric is in the tree, and only have GCH build against it
 # if it is. Cases when Lyric isn't going to be in the tree:
@@ -512,8 +497,14 @@ SOONG_CONFIG_google3a_config_target_device := $(LOCAL_TARGET_PRODUCT)
 
 ifneq ($(wildcard vendor/google/services/LyricCameraHAL/src),)
 SOONG_CONFIG_NAMESPACES += lyric
-SOONG_CONFIG_lyric += use_lyric_camera_hal
+SOONG_CONFIG_lyric += \
+	use_lyric_camera_hal \
+	tuning_product
+
+SOONG_CONFIG_lyric_soc := gs101
 SOONG_CONFIG_lyric_use_lyric_camera_hal := true
+# SOONG_CONFIG_lyric_tuning_product is set in device-specific makefiles,
+# such as device/google/raviole/device-oriole.mk
 
 # Camera HAL library selection
 SOONG_CONFIG_NAMESPACES += gch
@@ -884,7 +875,6 @@ USE_RADIO_HAL_1_6 := true
 
 ifneq ($(BOARD_WITHOUT_RADIO),true)
 $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/common/device-vendor.mk)
-PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.telephony.cdma.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.cdma.xml
 endif
 
 ifeq (,$(filter %_64,$(TARGET_PRODUCT)))
@@ -923,25 +913,6 @@ PRODUCT_PACKAGES_DEBUG += \
 	diag-vibrator-cs40l25a \
 	diag-vibrator-drv2624 \
 	$(NULL)
-
-# NFC
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.xml \
-	frameworks/native/data/etc/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hce.xml \
-	frameworks/native/data/etc/android.hardware.nfc.hcef.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hcef.xml \
-	frameworks/native/data/etc/com.nxp.mifare.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.nxp.mifare.xml \
-	frameworks/native/data/etc/android.hardware.nfc.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.uicc.xml \
-	frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.ese.xml
-
-PRODUCT_PACKAGES += \
-	NfcNci \
-	Tag \
-	android.hardware.nfc@1.2-service.st
-
-# SecureElement
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.se.omapi.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.ese.xml \
-	frameworks/native/data/etc/android.hardware.se.omapi.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.uicc.xml
 
 PRODUCT_PACKAGES += \
 	android.hardware.health@2.1-impl-gs101 \
@@ -1095,10 +1066,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     suspend.short_suspend_threshold_millis=2000 \
     suspend.short_suspend_backoff_enabled=true \
     suspend.max_sleep_time_millis=40000
-
-# (b/183612348): Enable skia reduceOpsTaskSplitting
-PRODUCT_PROPERTY_OVERRIDES += \
-    renderthread.skia.reduceopstasksplitting=true
 
 # Enable Incremental on the device
 PRODUCT_PROPERTY_OVERRIDES += \

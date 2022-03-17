@@ -195,7 +195,7 @@ void dumpGpsLogs(int fd, std::string destDir) {
     const std::string gpsLogDir = GPS_LOG_DIRECTORY;
     const std::string gpsTmpLogDir = gpsLogDir + "/.tmp";
     const std::string gpsDestDir = destDir + "/gps";
-    int maxFileNum = android::base::GetIntProperty(GPS_LOG_NUMBER_PROPERTY, 30);
+    int maxFileNum = android::base::GetIntProperty(GPS_LOG_NUMBER_PROPERTY, 20);
 
     RunCommandToFd(fd, "MKDIR GPS LOG", {"/vendor/bin/mkdir", "-p", gpsDestDir.c_str()},
                    CommandOptions::WithTimeout(2).Build());
@@ -491,6 +491,12 @@ void DumpstateDevice::dumpThermalSection(int fd) {
                    "for f in /sys/class/thermal/cooling* ; do "
                        "type=`cat $f/type` ; state2power_table=`cat $f/state2power_table` ; echo \"$type: $state2power_table\" ; "
                        "done"});
+    DumpFileToFd(fd, "TMU state:", "/sys/module/gs101_thermal/parameters/tmu_reg_dump_state");
+    DumpFileToFd(fd, "TMU current temperature:", "/sys/module/gs101_thermal/parameters/tmu_reg_dump_current_temp");
+    DumpFileToFd(fd, "TMU_TOP rise thresholds:", "/sys/module/gs101_thermal/parameters/tmu_top_reg_dump_rise_thres");
+    DumpFileToFd(fd, "TMU_TOP fall thresholds:", "/sys/module/gs101_thermal/parameters/tmu_top_reg_dump_fall_thres");
+    DumpFileToFd(fd, "TMU_SUB rise thresholds:", "/sys/module/gs101_thermal/parameters/tmu_sub_reg_dump_rise_thres");
+    DumpFileToFd(fd, "TMU_SUB fall thresholds:", "/sys/module/gs101_thermal/parameters/tmu_sub_reg_dump_fall_thres");
 }
 
 // Dump items related to touch
@@ -540,6 +546,12 @@ void DumpstateDevice::dumpTouchSection(int fd) {
 
         snprintf(cmd, sizeof(cmd), "%s", stm_cmd_path[i + 1]);
         if (!access(cmd, R_OK)) {
+            snprintf(cmd, sizeof(cmd),
+                     "echo 01 A4 06 C3 > %s; echo 02 A7 00 00 00 40 00 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "HDM debug information (32 bytes)",
+                           {"/vendor/bin/sh", "-c", cmd});
+
             snprintf(cmd, sizeof(cmd), "echo 23 00 > %s && cat %s",
                      stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
             RunCommandToFd(fd, "Mutual Raw Data",
@@ -605,7 +617,7 @@ void DumpstateDevice::dumpTouchSection(int fd) {
                            {"/vendor/bin/sh", "-c", cmd});
 
             snprintf(cmd, sizeof(cmd),
-                     "echo 01 A4 06 C3 > %s; echo 02 A7 00 00 00 20 00 > %s && cat %s",
+                     "echo 01 A4 06 C3 > %s; echo 02 A7 00 00 00 40 00 > %s && cat %s",
                      stm_cmd_path[i + 1], stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
             RunCommandToFd(fd, "HDM debug information (32 bytes)",
                            {"/vendor/bin/sh", "-c", cmd});
