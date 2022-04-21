@@ -118,5 +118,9 @@
         <permission name="android.permission.RECORD_AUDIO" fixed="false"/>
     </exception>
 
+    <privapp-permissions package="com.android.phone">
+        <permission name="android.permission.READ_PHONE_STATE"/>
+    </privapp-permissions>
+
 </exceptions>
 
