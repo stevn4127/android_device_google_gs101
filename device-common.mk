@@ -14,6 +14,21 @@
 # limitations under the License.
 #
 
+DEVICE_PACKAGE_OVERLAYS += \
+	device/google/gs101/overlay_common \
+	device/google/gs101/overlay_bliss
+
+# Rescue Party
+PRODUCT_PROPERTY_OVERRIDES += \
+persist.sys.disable_rescue=true
+
+EXTRA_UDFPS_ANIMATIONS := true
+TARGET_FACE_UNLOCK_SUPPORTED := true
+BLISS_BUILDTYPE := OFFICIAL
+
+# Boot animation
+TARGET_BOOT_ANIMATION_RES := 1440
+
 -include vendor/google_devices/gs101/proprietary/telephony/device-vendor.mk
 include device/google/gs101/device.mk
 include device/google/gs101/tts/voice_packs.mk
