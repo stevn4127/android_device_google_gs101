@@ -29,6 +29,9 @@ vendor_internal_prop(vendor_battery_defender_prop)
 # Battery profile for harness mode
 vendor_internal_prop(vendor_battery_profile_prop)
 
+# hal_health
+vendor_internal_prop(vendor_shutdown_prop)
+
 # AoC
 vendor_internal_prop(vendor_aoc_prop)
 
@@ -55,3 +58,6 @@ vendor_internal_prop(vendor_dynamic_sensor_prop)
 
 # UWB calibration
 system_vendor_config_prop(vendor_uwb_calibration_prop)
+
+# Trusty storage FS ready
+vendor_internal_prop(vendor_trusty_storage_prop)

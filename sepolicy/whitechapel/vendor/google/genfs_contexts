@@ -279,6 +279,9 @@ genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/panel_need_
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/panel_need_handle_idle_exit    u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2c0000.drmdsim/hs_clock                                          u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/hs_clock                                          u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c300000.drmdecon/counters                                         u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c301000.drmdecon/counters                                         u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c302000.drmdecon/counters                                         u:object_r:sysfs_display:s0
 
 # Modem
 genfscon sysfs /devices/platform/cp-tm1/cp_temp                                u:object_r:sysfs_modem:s0
@@ -354,6 +357,26 @@ genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/i2c-s2mpg11mfd/s2mp
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/1-002f/s2mpg11-meter/s2mpg11-odpm/iio:device0/sampling_rate         u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device0/enabled_rails u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/1-002f/s2mpg11-meter/s2mpg11-odpm/iio:device0/enabled_rails         u:object_r:sysfs_odpm:s0
+
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-1/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-2/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-3/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-4/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-5/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-8/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-0/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-2/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-3/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-4/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-5/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-6/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/wakeup       u:object_r:sysfs_wakeup:s0
 
 # bcl sysfs files
 genfscon sysfs /devices/virtual/pmic/mitigation                                        u:object_r:sysfs_bcl:s0
@@ -530,6 +553,11 @@ genfscon sysfs /devices/platform/100a0000.BIG                             u:obje
 genfscon sysfs /devices/platform/100b0000.G3D                             u:object_r:sysfs_thermal:s0
 genfscon sysfs /devices/platform/100b0000.ISP                             u:object_r:sysfs_thermal:s0
 genfscon sysfs /devices/platform/100b0000.TPU                             u:object_r:sysfs_thermal:s0
+
+#vendor-metrics
+genfscon sysfs /kernel/metrics/temp_residency/temp_residency_all/stats    u:object_r:sysfs_vendor_metrics:s0
+genfscon sysfs /kernel/metrics/resume_latency/resume_latency_metrics      u:object_r:sysfs_vendor_metrics:s0
+genfscon sysfs /kernel/metrics/irq/long_irq_metrics                       u:object_r:sysfs_vendor_metrics:s0
 
 # Trusty
 genfscon sysfs /module/trusty_virtio/parameters/use_high_wq               u:object_r:sysfs_trusty:s0

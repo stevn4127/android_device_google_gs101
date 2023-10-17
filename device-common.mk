@@ -14,18 +14,6 @@
 # limitations under the License.
 #
 
--include vendor/gapps/arm64/arm64-vendor.mk
-
-DEVICE_PACKAGE_OVERLAYS += \
-	device/google/gs101/overlay_bliss
-
-EXTRA_UDFPS_ANIMATIONS := true
-TARGET_FACE_UNLOCK_SUPPORTED := true
-BLISS_BUILDTYPE := OFFICIAL
-
-# Boot animation
-TARGET_BOOT_ANIMATION_RES := 1080
-
 ifneq ($(BOARD_WITHOUT_RADIO),true)
 -include vendor/google_devices/gs101/proprietary/telephony/device-vendor.mk
 endif
@@ -59,3 +47,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 # ZramWriteback
 -include hardware/google/pixel/mm/device_gki.mk
+
+# Set thermal warm reset
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.thermal_warmreset = true

@@ -67,6 +67,7 @@ vendor.audiodump.cca.config             u:object_r:vendor_audio_prop:s0
 
 # for display
 ro.vendor.hwc.drm.device                u:object_r:vendor_display_prop:s0
+persist.vendor.display.                 u:object_r:vendor_display_prop:s0
 
 # for camera
 persist.vendor.camera.               u:object_r:vendor_camera_prop:s0
@@ -86,6 +87,7 @@ persist.vendor.nfc.                             u:object_r:vendor_nfc_prop:s0
 
 # Battery
 vendor.battery.defender.                        u:object_r:vendor_battery_defender_prop:s0
+persist.vendor.shutdown.                        u:object_r:vendor_shutdown_prop:s0
 
 # test battery profile
 persist.vendor.testing_battery_profile          u:object_r:vendor_battery_profile_prop:s0
@@ -116,3 +118,6 @@ vendor.dynamic_sensor.                          u:object_r:vendor_dynamic_sensor
 
 # uwb
 ro.vendor.uwb.calibration.                      u:object_r:vendor_uwb_calibration_prop:s0 exact string
+
+# Trusty
+ro.vendor.trusty.storage.fs_ready               u:object_r:vendor_trusty_storage_prop:s0
